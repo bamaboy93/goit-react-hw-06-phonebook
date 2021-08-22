@@ -31,7 +31,7 @@ const Form = () => {
 
   const formSubmit = e => {
     e.preventDefault();
-
+    
     if (!name || !number) return;
 
     const contactName = contacts.map(contact => contact.name.toLowerCase());
@@ -40,7 +40,7 @@ const Form = () => {
       return;
     }
 
-    dispatch(actions.addContactPhone(name, number));
+    dispatch(actions.addContact(name, number));
 
     setName('');
     setNumber('');  

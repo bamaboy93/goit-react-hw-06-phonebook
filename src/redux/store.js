@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -30,12 +30,14 @@ const persistConfig = {
   
 };
 
+const rootReducer = combineReducers({
+  contacts: contactsReducer,
+});
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
-  reducer: {
-    contacts: persistReducer(persistConfig, contactsReducer),
-  },
+  reducer: persistedReducer,
   middleware,
-  
+  devTools: process.env.NODE_ENV === 'development',
 });
 
 
